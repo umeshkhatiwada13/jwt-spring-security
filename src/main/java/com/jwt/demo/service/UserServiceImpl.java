@@ -1,23 +1,27 @@
 package com.jwt.demo.service;
-
 import com.jwt.demo.model.Role;
 import com.jwt.demo.model.User;
 import com.jwt.demo.repo.RoleRepo;
 import com.jwt.demo.repo.UserRepo;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+
+    @Autowired
+    public UserServiceImpl(UserRepo userRepo, RoleRepo roleRepo) {
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+    }
 
     @Override
     public User saveUser(User user) {
